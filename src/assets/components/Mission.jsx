@@ -1,13 +1,19 @@
 import React from "react";
 import oceanImage from "../UI/design.jpg"; 
 import { Link } from "react-router-dom";
+import { motion } from 'motion/react';
 
 const Mission = () => {
   return (
     <div className="flex justify-center items-center w-screen my-16">
       <div className="bg-gray-900 text-white py-8 w-[90vw] max-w-7xl rounded-3xl">
         <div className="container mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
+          <motion.div 
+          initial={{ x: -400, opacity: 0}}
+          whileInView={{ x: 0, opacity: 1}}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
             {/* Left Column - Mission Statement */}
             <div className="space-y-3 sm:space-y-4 md:space-y-6">
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">Our mission</h2>
@@ -55,7 +61,7 @@ const Mission = () => {
                 Through collaboration, we build stronger communities and a brighter future.
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

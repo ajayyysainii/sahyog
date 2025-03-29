@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Users, Heart, Building2 } from 'lucide-react';
+import { motion } from 'motion/react';
 
 function AnimatedNumber({ end, duration = 2000, prefix = '' }) {
   const [count, setCount] = useState(0);
@@ -37,7 +38,12 @@ function StatsCard({ icon: Icon, label, value, prefix = '' }) {
 function Counter() {
   return (
     <div className="bg-gradient-to-r from-[#0f172a] to-[#334155] p-8 rounded-2xl shadow-2xl mx-4 mt-16">
-      <div className="max-w-4xl mx-auto">
+      <motion.div 
+      initial={{ y: 100, opacity: 0}}
+      whileInView={{ y: 0, opacity: 1}}
+      transition={{ duration: 1 }}
+      viewport={{ once: true }}
+      className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">Our Impact</h1>
           <p className="text-white/80">Making a difference together</p>
@@ -61,7 +67,7 @@ function Counter() {
             value={120}
           />
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

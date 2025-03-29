@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'motion/react';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
@@ -14,7 +15,12 @@ const Footer = () => {
   return (
     <footer className="bg-black w-full text-white px-4 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20">
       {/* Hero Text Section */}
-      <div className="max-w-7xl mx-auto">
+      <motion.div 
+      initial={{ y: 100, opacity: 0}}
+      whileInView={{ y: 0, opacity: 1}}
+      transition={{ duration: 1}}
+      viewport={{ once: true }}
+      className="max-w-7xl mx-auto">
         <div className="flex flex-col justify-center items-center text-center mb-12 sm:mb-16 lg:mb-20">
           <h1 id='imagestyle' className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold max-w-4xl leading-tight sm:leading-tight md:leading-tight lg:leading-tight ">
             Building Futures, One Crowdfunded brick at a time
@@ -89,7 +95,7 @@ const Footer = () => {
         <div className="mt-12 sm:mt-16 pt-8 border-t border-gray-800 text-center text-gray-400">
           <p>&copy; {new Date().getFullYear()} Sahyog. All rights reserved.</p>
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 };
