@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-const SignUp = () => {
+const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
     password: '',
-    gender: '',
-    mobileNumber: ''
   });
   const [showSuccess, setShowSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,17 +21,14 @@ const SignUp = () => {
     setErrorMessage('');
     
     try {
-      const response = await fetch("http://localhost:3000/api/createuser", {
+      const response = await fetch("http://localhost:3000/api/loginuser", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          name: formData.name,
           email: formData.email,
           password: formData.password,
-          gender: formData.gender,
-          mobileNumber: formData.mobileNumber
         })
       });
       
@@ -45,17 +39,14 @@ const SignUp = () => {
         setShowSuccess(true);
         // Clear the form
         setFormData({
-          name: '',
           email: '',
           password: '',
-          gender: '',
-          mobileNumber: ''
         });
-        
+        localStorage.setItem("authToken",json.authToken)
         // Automatically redirect to login page after 3 seconds
         setTimeout(() => {
-          navigate('/login');
-        }, 3000);
+          navigate('/');
+        }, 2000);
       } else {
         setErrorMessage(json.message || "Enter Valid Credentials");
       }
@@ -104,19 +95,7 @@ const SignUp = () => {
           )}
           
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Enter your full name"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
-                required
-              />
-            </div>
+           
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
@@ -126,7 +105,7 @@ const SignUp = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="Enter your email address"
+                placeholder="Enter your Email address"
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
                 required
               />
@@ -140,38 +119,7 @@ const SignUp = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                placeholder="Create a password"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
-                required
-              />
-            </div>
-
-            <div>
-              <label htmlFor="gender" className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
-              <select
-                id="gender"
-                name="gender"
-                value={formData.gender}
-                onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500 bg-white"
-                required
-              >
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-
-            <div>
-              <label htmlFor="mobileNumber" className="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
-              <input
-                type="tel"
-                id="mobileNumber"
-                name="mobileNumber"
-                value={formData.mobileNumber}
-                onChange={handleChange}
-                placeholder="Enter your mobile number"
+                placeholder="Enter your Password"
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
                 required
               />
@@ -190,14 +138,14 @@ const SignUp = () => {
                   </svg>
                   Processing...
                 </span>
-              ) : "Sign Up"}
+              ) : "Log In"}
             </button>
           </form>
 
           <p className="mt-6 text-center text-gray-600">
-            Already have an account?{' '}
-            <Link to="/login" className="text-fblue-500 font-semibold hover:text-blue-600">
-              Sign In
+            Create New Account?{' '}
+            <Link to="/createuser" className="text-fblue-500 font-semibold hover:text-blue-600">
+              Sign Up
             </Link>
           </p>
         </div>
@@ -206,4 +154,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;

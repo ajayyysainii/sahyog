@@ -1,33 +1,34 @@
 import React from "react";
 import Navbar from "./Navbar";
-
+import { Link } from "react-router-dom";
+import image from "../UI/image.png"
 
 const Hero = () => {
   return (
     <div className="flex justify-center mt-5">
-      {/* <div
-        className="min-h-screen bg-cover bg-center relative"
-        style={{ backgroundImage: `url(${design})` }}
+      <div
+        className="relative h-[85vh] w-[90vw] rounded-3xl bg-cover bg-center overflow-hidden"
+        style={{
+          backgroundImage: `url(${image})`,
+        }}
       >
-        <Navbar />
-        <div className="container mx-auto px-4 md:px-10 py-8 md:py-10">
-          <div className="max-w-3xl">
-            <h1 className="font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
-              <span className="block text-white ">Collaboration</span>
-              <span className="block text-white ">Worldwide</span>
-              <span className="block text-white ">Building Hope</span>
-              <span className="block underline text-yellow-200 ">Far & Wide</span>
-            </h1>
+
+        <div className="absolute inset-0 bg-black/30"></div>
+        
+        <div className="absolute bottom-0 w-full flex sm:flex-row flex-col items-center justify-between px-8 pb-8">
+          <div className="flex sm:flex-row flex-col items-center gap-8">
+            <h1 className="text-8xl md:text-9xl lg:text-[200px] font-bold text-white leading-none">Funds</h1>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+              Help <span className="block">Other</span>
+            </h2>
           </div>
+          <Link to='/projects'>
+          <div className="bg-white text-black px-6 py-3 sm:mt-0 mt-5 rounded-full text-lg md:text-xl font-semibold cursor-pointer hover:bg-opacity-90 transition-all">
+            Start CrowdFunding
+          </div>
+          </Link>
         </div>
       </div>
-    </div> */}
-    <div className="bg-red-200 h-[85vh] w-[90vw] rounded-3xl">
-      
-
-    </div>
-
-
     </div>
   );
 };
