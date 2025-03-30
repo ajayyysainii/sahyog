@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 
 const projects = [
-  { id: 1, name: "Education for Underprivileged" },
-  { id: 2, name: "Healthcare Support" },
-  { id: 3, name: "Rural Development" },
-  { id: 4, name: "Women Empowerment" },
-  { id: 5, name: "Environmental Conservation" }
+  { id: 1, name: "Water Well Construction in Maharashtra" },
+  { id: 2, name: "Bridge Construction in Assam" },
+  { id: 3, name: "School Renovation in Uttar Pradesh" },
+  { id: 4, name: "Public Library in Bihar" },
+  { id: 5, name: "Rural Road Development in Madhya Pradesh" },
+  { id: 6, name: "Community Health Center in Odisha" },
+  { id: 7, name: "Affordable Housing Project in West Bengal" },
+  { id: 8, name: "Rainwater Harvesting in Tamil Nadu" },
+  { id: 9, name: "Wind Energy Project in Gujarat" },
+  { id: 5, name: "Sanitation Facilities in Jharkhand" },
+
 ];
 
 const predefinedAmounts = [100, 500, 1000, 5000];
