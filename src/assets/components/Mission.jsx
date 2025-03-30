@@ -9,8 +9,8 @@ const Mission = () => {
       <div className="bg-gray-900 text-white py-8 w-[90vw] max-w-7xl rounded-3xl">
         <div className="container mx-auto px-4 md:px-8">
           <motion.div 
-          initial={{ x: -400, opacity: 0}}
-          whileInView={{ x: 0, opacity: 1}}
+          initial={{ y: 200, opacity: 0}}
+          whileInView={{ y: 0, opacity: 1}}
           transition={{ duration: 1 }}
           viewport={{ once: true }}
           className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12">

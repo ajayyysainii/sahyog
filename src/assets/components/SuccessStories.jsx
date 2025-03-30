@@ -112,14 +112,14 @@ const SuccessStories = () => {
             onClick={handlePrevious}
             className="absolute left-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 transition-colors"
           >
-            <ChevronLeft className="w-6 h-6 text-gray-800" />
+            <ChevronLeft className="w-6 h-6 text-gray-800 cursor-pointer" />
           </button>
           
           <button
             onClick={handleNext}
             className="absolute right-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 transition-colors"
           >
-            <ChevronRight className="w-6 h-6 text-gray-800" />
+            <ChevronRight className="cursor-pointer w-6 h-6 text-gray-800" />
           </button>
 
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
