@@ -1,5 +1,6 @@
 export const donationResponses = {
     // General donation questions
+    "What is your name" : "My name is SahyogBot",
     "how are you": "I am fine! How are you",
     "how can i donate": "You can donate through our secure payment portal using credit/debit cards, bank transfers, or digital wallets. All donations are tax-deductible and go directly to our infrastructure projects.",
     

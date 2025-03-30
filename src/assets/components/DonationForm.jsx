@@ -8,12 +8,21 @@ const projects = [
   { id: 5, name: "Environmental Conservation" }
 ];
 
+const predefinedAmounts = [100, 500, 1000, 5000];
+
 const DonationForm = () => {
   const [selectedProject, setSelectedProject] = useState('');
   const [amount, setAmount] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const loadRazorpay = () => {
     return new Promise((resolve) => {
+      if (window.Razorpay) {
+        resolve(true);
+        return;
+      }
+
       const script = document.createElement('script');
       script.src = 'https://checkout.razorpay.com/v1/checkout.js';
       script.onload = () => resolve(true);
@@ -23,51 +32,78 @@ const DonationForm = () => {
   };
 
   const handleDonation = async () => {
-    if (!selectedProject || !amount) {
-      alert('Please select a project and enter amount');
+    setError(null);
+    
+    if (!selectedProject) {
+      setError('Please select a project');
       return;
     }
 
-    const res = await loadRazorpay();
-    if (!res) {
-      alert('Razorpay SDK failed to load');
+    if (!amount || isNaN(Number(amount)) || Number(amount) <= 0) {
+      setError('Please enter a valid amount');
       return;
     }
 
-    const options = {
-      key: 'BXSAVuGXl6ksFkpvrs3Vegev',
-      amount: Number(amount) * 100, // Amount in paise
-      currency: 'INR',
-      name: 'Sahyog',
-      description: `Donation for ${selectedProject}`,
-      handler: function(response) {
-        alert('Payment successful! Payment ID: ' + response.razorpay_payment_id);
-        setSelectedProject('');
-        setAmount('');
-      },
-      prefill: {
-        name: '',
-        email: '',
-        contact: ''
-      },
-      theme: {
-        color: '#2563EB'
+    setIsLoading(true);
+
+    try {
+      const res = await loadRazorpay();
+      if (!res) {
+        throw new Error('Razorpay SDK failed to load');
       }
-    };
 
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
+      const options = {
+        key: "rzp_test_FNM9Y9AB22JW21",
+        amount: Number(amount) * 100,
+        currency: 'INR',
+        name: 'Sahyog',
+        description: `Donation for ${selectedProject}`,
+        handler: function(response) {
+          alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
+          setSelectedProject('');
+          setAmount('');
+          setIsLoading(false);
+        },
+        prefill: {
+          name: '',
+          email: '',
+          contact: ''
+        },
+        theme: {
+          color: '#2563EB'
+        },
+        modal: {
+          ondismiss: () => {
+            setIsLoading(false);
+          }
+        }
+      };
+
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.on('payment.failed', function(response) {
+        alert(`Payment failed! Error: ${response.error.description}`);
+        setIsLoading(false);
+      });
+      paymentObject.open();
+    } catch (err) {
+      setError(err.message || 'Payment failed');
+      setIsLoading(false);
+    }
   };
 
-  const predefinedAmounts = [100, 500, 1000, 5000];
-
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-8">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-gray-900">Make a Donation</h2>
           <p className="mt-2 text-gray-600">Your support makes a difference</p>
         </div>
+
+        {error && (
+          <div className="mb-4 p-4 bg-red-50 text-red-700 rounded-md">
+            {error}
+          </div>
+        )}
 
         <div className="space-y-6">
           <div>
@@ -78,6 +114,7 @@ const DonationForm = () => {
               value={selectedProject}
               onChange={(e) => setSelectedProject(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              disabled={isLoading}
             >
               <option value="">Choose a project</option>
               {projects.map((project) => (
@@ -98,6 +135,8 @@ const DonationForm = () => {
               onChange={(e) => setAmount(e.target.value)}
               placeholder="Enter amount"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              disabled={isLoading}
+              min="1"
             />
           </div>
 
@@ -110,7 +149,9 @@ const DonationForm = () => {
                 <button
                   key={preAmount}
                   onClick={() => setAmount(preAmount.toString())}
-                  className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+                  disabled={isLoading}
+                  type="button"
                 >
                   ₹{preAmount}
                 </button>
@@ -120,9 +161,10 @@ const DonationForm = () => {
 
           <button
             onClick={handleDonation}
-            className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200"
+            disabled={isLoading}
+            className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Donate Now
+            {isLoading ? 'Processing...' : 'Donate Now'}
           </button>
         </div>
       </div>
