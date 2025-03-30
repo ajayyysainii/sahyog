@@ -5,7 +5,7 @@ import { motion } from 'motion/react';
 
 const WhySahyog = () => {
   return (
-    <div className="min-h-screen px-4 py-8 md:py-12 lg:py-16">
+    <div className="min-h-screen px-4 py-8 md:py-12 lg:py-16 overflow-hidden">
       <motion.div
       initial={{ x: 400, opacity: 0}}
       whileInView={{ x: 0, opacity: 1}}

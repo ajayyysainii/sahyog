@@ -24,7 +24,7 @@ const SignUp = () => {
     setErrorMessage('');
     
     try {
-      const response = await fetch("http://localhost:3000/api/createuser", {
+      const response = await fetch("https://sahyog-backend-3.onrender.com/api/createuser", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
