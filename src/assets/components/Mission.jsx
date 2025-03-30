@@ -12,7 +12,7 @@ const Mission = () => {
           initial={{ y: 200, opacity: 0}}
           whileInView={{ y: 0, opacity: 1}}
           transition={{ duration: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: true , amount: 0.4}}
           className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
             {/* Left Column - Mission Statement */}
             <div className="space-y-3 sm:space-y-4 md:space-y-6">

@@ -84,7 +84,7 @@ function AboutUs() {
           initial={{ y: 200, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: true , amount: 0.4}}
           className="container mx-auto px-4"
         >
           <div className="max-w-3xl mx-auto text-center">
@@ -106,7 +106,7 @@ function AboutUs() {
         initial={{ y: 100, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 1 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0.4 }}
         className="py-10 md:py-16 bg-white"
       >
         <div className="container mx-auto px-4">
@@ -156,7 +156,7 @@ function AboutUs() {
       initial={{ y: 100, opacity: 0}}
       whileInView={{ y: 0, opacity: 1}}
       transition={{ duration: 1 }}
-      viewport={{ once: true }}
+      viewport={{ once: true , amount: 0.4}}
       className="py-10 md:py-16 bg-gradient-to-r from-emerald-500 to-emerald-900">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center text-white">

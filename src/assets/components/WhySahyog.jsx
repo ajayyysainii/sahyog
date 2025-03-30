@@ -10,7 +10,7 @@ const WhySahyog = () => {
       initial={{ x: 400, opacity: 0}}
       whileInView={{ x: 0, opacity: 1}}
       transition={{ duration: 1 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0.4 }}
       className="flex flex-col lg:flex-row lg:justify-center items-center gap-8 md:gap-12 max-w-7xl mx-auto">
         {/* Heading section - stacks vertically on mobile, side-by-side on desktop */}
         <div className="text-center lg:text-left">

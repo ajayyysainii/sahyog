@@ -25,7 +25,7 @@ const Navbar = () => {
   return (
     <>
       {/* Desktop Navbar - hidden on mobile (below md breakpoint) */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1, type: "spring", stiffness: 120 }}
@@ -56,17 +56,17 @@ const Navbar = () => {
             </NavLink>
           ) : (
             <div className="relative">
-              <button 
+              <button
                 onClick={toggleProfile}
                 className="rounded-full hover:ring-2 hover:ring-gray-300 transition-all"
               >
-                <img 
-                  src="https://devfolio-prod.s3.ap-south-1.amazonaws.com/assets/avatar@1x.png" 
+                <img
+                  src="https://devfolio-prod.s3.ap-south-1.amazonaws.com/assets/avatar@1x.png"
                   alt="User Avatar"
                   className="w-10 h-10 rounded-full"
                 />
               </button>
-              
+
               {/* Profile Dropdown */}
               {isProfileOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
@@ -99,13 +99,26 @@ const Navbar = () => {
         <div className="md:hidden bg-white py-4 px-4 shadow-md absolute w-full z-50">
           <ul className="flex flex-col gap-4 font-semibold">
             <li>
-              <NavLink to="/aboutus" onClick={toggleMenu}> About Us</NavLink>
+              <NavLink to="/" onClick={toggleMenu}>
+                {" "}
+                Home
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/projects" onClick={toggleMenu}>Projects</NavLink>
+              <NavLink to="/aboutus" onClick={toggleMenu}>
+                {" "}
+                About Us
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/donation" onClick={toggleMenu}>Donate Now</NavLink>
+              <NavLink to="/projects" onClick={toggleMenu}>
+                Projects
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/donation" onClick={toggleMenu}>
+                Donate Now
+              </NavLink>
             </li>
             {!localStorage.getItem("authToken") ? (
               <NavLink to="/signup">
@@ -115,8 +128,8 @@ const Navbar = () => {
               </NavLink>
             ) : (
               <div className="flex items-center gap-2">
-                <img 
-                  src="https://devfolio-prod.s3.ap-south-1.amazonaws.com/assets/avatar@1x.png" 
+                <img
+                  src="https://devfolio-prod.s3.ap-south-1.amazonaws.com/assets/avatar@1x.png"
                   alt="User Avatar"
                   className="w-10 h-10 rounded-full"
                 />
